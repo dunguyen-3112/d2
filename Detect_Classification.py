@@ -7,9 +7,9 @@ import os
 
 facedetect = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
 
-model = load_model('./BC1.h5',compile=False)
+model = load_model('./model.h5',compile=False)
 #L = os.listdir('./input/train')
-L = {0: 'B', 1: 'C', 2: 'D',3:'A' }
+L = {0: 'Toan', 1: 'San', 2: 'Tuyen',3:'Du' }
 
 cap = cv2.VideoCapture(0)
 

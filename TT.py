@@ -2,7 +2,7 @@ import cv2
 import os
 import uuid
 # Establish a connection to the webcam
-ANC_PATH = 'ade'
+ANC_PATH = 'Toan'
 cap = cv2.VideoCapture(0)
 facedetect = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
 while cap.isOpened(): 
