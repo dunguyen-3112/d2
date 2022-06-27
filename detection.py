@@ -1,9 +1,7 @@
-#! /usr/bin/env python3
-
 import copy
 import cv2
 import numpy as np
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 import time
 
 # Cac khai bao bien
@@ -13,7 +11,7 @@ bgModel = None
 
 lab = {0: 'Fall', 1: 'NonFall'}
 # Load model tu file da train
-model = load_model('models/BC.h5')
+model = load_model('./Model1.h5')
 
 # Ham de predict xem la trang thai gi
 def predict_rgb_image_vgg(image):
@@ -55,19 +53,21 @@ predThreshold= 60
 isBgCaptured = 0  # Bien luu tru da capture background chua
 
 # Camera
-url = "http://192.168.99.6:4747/video"
-camera = cv2.VideoCapture(url)
+#url = "http://192.168.99.6:4747/video"
+camera = cv2.VideoCapture(0)
 # camera = cv2.VideoCapture(0)
-camera.set(10,200)
-camera.set(cv2.CAP_PROP_AUTO_EXPOSURE, 0.01)
+camera.set(3,1920)
+camera.set(4, 1080)
 
-while camera.isOpened():
+while True:
     # Doc anh tu webcam
     ret, frame = camera.read()
+    cv2.imshow('original', frame)
+    continue
     # Lam min anh
-    frame = cv2.bilateralFilter(frame, 5, 50, 100)
+    #frame = cv2.bilateralFilter(frame, 5, 50, 100)
     # Lat ngang anh
-    frame = cv2.flip(frame, 1)
+    #frame = cv2.flip(frame, 1)
 
     # Ve khung hinh chu nhat vung detection region
     cv2.rectangle(frame, (int(cap_region_x_begin * frame.shape[1]), 0),
@@ -130,7 +130,7 @@ while camera.isOpened():
         time.sleep(1)
 
 
-    cv2.imshow('original', cv2.resize(frame, dsize=None, fx=0.5, fy=0.5))
+    cv2.imshow('original', frame)#cv2.resize(frame, dsize=None, fx=0.5, fy=0.5))
 
 
 cv2.destroyAllWindows()

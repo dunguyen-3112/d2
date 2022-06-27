@@ -2,7 +2,7 @@ import cv2
 import os
 import uuid
 # Establish a connection to the webcam
-ANC_PATH = 'Toan'
+ANC_PATH = 'Tuyen'
 cap = cv2.VideoCapture(0)
 facedetect = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
 while cap.isOpened(): 
@@ -14,9 +14,10 @@ while cap.isOpened():
         img = cv2.resize(crop_img,[224,224])
         imgname = os.path.join(ANC_PATH, '{}.jpg'.format(uuid.uuid1()))
         cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),3)
+        cv2.imwrite(imgname, img)
         break
     
-    cv2.imwrite(imgname, img)
+    
 
     cv2.imshow('Image', frame)
     
